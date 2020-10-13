@@ -33,7 +33,7 @@ export default {
     .mapContainer {
         border-radius: 5px;
         margin: 50px 50px;
-        min-width: 900px;
-        min-height: 700px;
+        width: 700px;
+        height: 700px;
     }
 </style>
