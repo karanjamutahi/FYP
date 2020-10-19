@@ -10,6 +10,7 @@
 </template>
 
 <script>
+
 const randomIndex = Math.floor((Math.random()*10) + 1);
 
 export default {
@@ -59,8 +60,8 @@ export default {
     },
     computed: {
         presentLocation: function() {
-            //console.log(`Random Index is ${this.randomIndex}`);
             const presentLocation =  this.busStops[this.randomIndex].name
+            //console.log(`Random Index is ${this.randomIndex}`);
             //console.log(presentLocation);
             return presentLocation;
         }
