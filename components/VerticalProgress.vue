@@ -1,15 +1,29 @@
 <template>
-    <ul class="VerticalProgressList">
+    <ul class="VerticalProgressList" v-bind:style="progressGradient">
         <slot></slot>
     </ul>
 </template>
 
 <script>
+
 export default {
     name: 'VerticalProgress',
+    props: ['progress'],
     data: function() {
+        console.log('Progress is at: ' + this.progress * 100 + '%');
         return {
-            iko: "tu sawa"
+            iko: "tu sawa",
+            currentProgress: this.progress * 100,
+            activeColor: '#fbbc04',
+            passiveColor: '#eee',
+        }
+    },
+    computed: {
+        progressGradient: function() {
+            console.log(`linear-gradient(180 deg, ${this.activeColor} 0%, ${this.activeColor} ${this.currentProgress}%, ${this.passiveColor} ${this.currentProgress+1}%, ${this.passiveColor} 100%)`);
+            return {
+                '--progress-background': `linear-gradient(180deg, ${this.activeColor} 0%, ${this.activeColor} ${this.currentProgress}%, ${this.passiveColor} ${this.currentProgress+1}%, ${this.passiveColor} 100%)`,
+                };
         }
     }
 }
@@ -17,13 +31,15 @@ export default {
 
 <style scoped>
     .children {
-        color: red;
+        color: #ffa600;
+        font-weight: 600;
     }
 
     ul.VerticalProgressList {
         list-style: none;
         position: relative;
         padding-left: 20%;
+        color: #ffa600;
     }
 
     ul.VerticalProgressList::after {
@@ -34,7 +50,8 @@ export default {
         left: 43px;
         top: 30px;
         height: calc(100% - 60px);
-        background: linear-gradient(to bottom, #1d976c, #93f9b9);
+        background: var(--progress-background);
+        /*background: linear-gradient(180deg, #fbbc04 0%, #fbbc04 30%, #eee 31%, #eee 100%);*/
         z-index: 0;
     }
 
@@ -48,14 +65,28 @@ export default {
         height: 15px;
         border-radius: 50%;
         position: absolute;
-        background-color: white;
-        border: 3px solid #1d976c;
+        background-color:#eee;
+        border: 3px solid #eee;
         left: 37px;
         z-index: 3;
     }
 
+    li.active {
+        font-size: 3.5em;
+    }
+
     li.active::before {
-        background-color: #1d976c;
+        background-color: #fbbc04;
+        border: 3px solid #fbbc04;
+        width: 20px;
+        height: 20px;
+        left: 35px;
+        margin: 20px 0;
+    }
+
+    li.visited::before {
+        background-color: #fbbc04;
+        border: 3px solid #fbbc04;
     }
 
 </style>
