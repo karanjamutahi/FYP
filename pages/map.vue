@@ -6,14 +6,16 @@
                 <VerticalProgress v-bind:progress="(this.randomIndex)/(this.busStops.length - 1)">
                     <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < randomIndex ? 'visited' : '' ]" > {{ name }} </li>
                 </VerticalProgress>
+                <div class="row">
+                    <div class="button" v-on:click="incrementRadom">Next</div>
+                    <div class="button">Previous</div>
+                </div>
             </div>
         </div>
-        <button v-on:click="incrementRadom">Click Me!</button>
     </div>
 </template>
 
 <script>
-
 let randomIndex = Math.floor((Math.random()*10) + 1);
 
 export default {
@@ -97,5 +99,10 @@ export default {
     div.center-text {
         display: inline-block;
         margin: 0 auto;
+    }
+
+    div.button {
+        background-color: #ffa600;
+        color: #000333;
     }
 </style>
