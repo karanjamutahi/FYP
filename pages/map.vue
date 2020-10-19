@@ -1,15 +1,19 @@
 <template>
-    <div class="row">
-        <MapBox/>
-        <div class="rowitem">
-            <VerticalProgress v-bind:progress="(this.randomIndex)/(this.busStops.length - 1)">
-                <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < randomIndex ? 'visited' : '' ]" > {{ name }} </li>
-            </VerticalProgress>
+    <div>
+        <div class="row">
+            <MapBox/>
+            <div class="rowitem">
+                <VerticalProgress v-bind:progress="(this.randomIndex)/(this.busStops.length - 1)">
+                    <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < randomIndex ? 'visited' : '' ]" > {{ name }} </li>
+                </VerticalProgress>
+            </div>
         </div>
+        <button v-on:click="incrementRadom">Click Me!</button>
     </div>
 </template>
 
 <script>
+
 let randomIndex = Math.floor((Math.random()*10) + 1);
 
 export default {
