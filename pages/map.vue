@@ -10,8 +10,7 @@
 </template>
 
 <script>
-
-const randomIndex = Math.floor((Math.random()*10) + 1);
+let randomIndex = Math.floor((Math.random()*10) + 1);
 
 export default {
     data() {
@@ -64,6 +63,11 @@ export default {
             //console.log(`Random Index is ${this.randomIndex}`);
             //console.log(presentLocation);
             return presentLocation;
+        }
+    },
+    methods: {
+        incrementRadom: function() {
+            this.randomIndex < this.busStops.length && this.randomIndex++
         }
     }
  }
