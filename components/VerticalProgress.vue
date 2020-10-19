@@ -20,7 +20,6 @@ export default {
     },
     computed: {
         progressGradient: function() {
-            console.log(`linear-gradient(180 deg, ${this.activeColor} 0%, ${this.activeColor} ${this.currentProgress}%, ${this.passiveColor} ${this.currentProgress+1}%, ${this.passiveColor} 100%)`);
             return {
                 '--progress-background': `linear-gradient(180deg, ${this.activeColor} 0%, ${this.activeColor} ${this.currentProgress}%, ${this.passiveColor} ${this.currentProgress+1}%, ${this.passiveColor} 100%)`,
                 };

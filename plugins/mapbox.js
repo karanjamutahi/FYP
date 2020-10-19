@@ -5,7 +5,7 @@ export default (context, inject) => {
     const myMap = new mapboxgl.Map({
         container: 'mapHolder',
         style: "mapbox://styles/mapbox/streets-v11",
-        center: [37.01454335, -1.1070745666666666],
+        center: [ 37.01454335, -1.1070745666666666 ],
         zoom: 14.3,
     });
 

@@ -2,7 +2,7 @@
     <div class="row">
         <MapBox/>
         <div class="rowitem">
-            <VerticalProgress v-bind:progress="(this.randomIndex+1)/this.busStops.length">
+            <VerticalProgress v-bind:progress="(this.randomIndex)/this.busStops.length">
                 <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < randomIndex ? 'visited' : '' ]" > {{ name }} </li>
             </VerticalProgress>
         </div>
