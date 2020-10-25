@@ -21,7 +21,7 @@ export default {
             center: [37.01454335, -1.1070745666666666],
             zoom: 14,
         });
-
+        
         const marker = new mapboxgl.Marker()
                                     .setLngLat([37.01454335, -1.1070745666666666])
                                     .addTo(GlobalMap);
@@ -33,7 +33,7 @@ export default {
     .mapContainer {
         border-radius: 5px;
         margin: 50px 50px;
-        width: 700px;
+        width: 100%;
         height: 700px;
     }
 </style>

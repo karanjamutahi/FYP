@@ -12,8 +12,6 @@ export default {
     data: function() {
         console.log('Progress is at: ' + this.progress * 100 + '%');
         return {
-            iko: "tu sawa",
-            currentProgress: this.progress * 100,
             activeColor: '#fbbc04',
             passiveColor: '#eee',
         }
@@ -23,6 +21,9 @@ export default {
             return {
                 '--progress-background': `linear-gradient(180deg, ${this.activeColor} 0%, ${this.activeColor} ${this.currentProgress}%, ${this.passiveColor} ${this.currentProgress+1}%, ${this.passiveColor} 100%)`,
                 };
+        },
+        currentProgress: function() {
+            return this.progress * 100
         }
     }
 }
@@ -81,6 +82,14 @@ export default {
         height: 20px;
         left: 35px;
         margin: 20px 0;
+    }
+
+    li.active:first-child::before {
+        margin: 0px 0px 20px 0px;
+    }
+
+    li.active:last-child::before {
+        margin-bottom: 0px;
     }
 
     li.visited::before {

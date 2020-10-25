@@ -8,7 +8,7 @@
                 </VerticalProgress>
                 <div class="row">
                     <div class="button" v-on:click="incrementRadom">Next</div>
-                    <div class="button">Previous</div>
+                    <div class="button" v-on:click="decrementRandom">Previous</div>
                 </div>
             </div>
         </div>
@@ -74,6 +74,9 @@ export default {
     methods: {
         incrementRadom: function() {
             this.randomIndex < this.busStops.length && this.randomIndex++
+        },
+        decrementRandom: function() {
+            this.randomIndex > 0 && this.randomIndex--
         }
     }
  }
@@ -104,5 +107,18 @@ export default {
     div.button {
         background-color: #ffa600;
         color: #000333;
+        min-width: 20%;
+        min-height: 2.5em;
+        margin: 20px 10px;
+        border-radius: 3px;
+        text-align: center;
+        line-height: 2.5em;
+        font-weight: 600;
+        padding: 0px 10px;
     }
+
+    div.button:hover {
+        cursor: pointer;
+    }
+
 </style>

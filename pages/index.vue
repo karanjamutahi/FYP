@@ -22,6 +22,13 @@
         >
           GitHub
         </a>
+        <NuxtLink 
+          to="/map"
+          rel='noopener'
+          class='button--green'
+        >
+        Map
+        </NuxtLink>
       </div>
     </div>
   </div>
