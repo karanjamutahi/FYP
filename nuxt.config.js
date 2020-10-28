@@ -11,7 +11,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/bus-15.svg' },
       { rel: 'stylesheet', href:'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css'}
     ]
   },
@@ -22,7 +22,9 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '~/plugins/mqtt.js',
+    '~/plugins/mqtt.client.js',
+    '~/plugins/fetchResults.client.js',
+    '~/plugins/mapbox.client.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

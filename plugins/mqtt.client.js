@@ -10,7 +10,6 @@ export default(context, inject) => {
             reconnectPeriod: 1000,
         };
 
-        const retries = 3;
         const url =  location.protocol === 'https:' ? 'wss://broker.emqx.io:8084/mqtt' : 'ws://broker.emqx.io:8083/mqtt'
         const mqttClient = mqtt.connect(url, options);
         mqttClient.publish('/sawaTVCollector/webapp', 'connected');

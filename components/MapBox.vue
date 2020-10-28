@@ -13,6 +13,7 @@ export default {
         };
     },
     mounted: function() {
+        /*
         console.log(this.accessToken);
         mapboxgl.accessToken = this.accessToken;
         const GlobalMap = new mapboxgl.Map({
@@ -21,10 +22,9 @@ export default {
             center: [37.01454335, -1.1070745666666666],
             zoom: 14,
         });
-        
-        const marker = new mapboxgl.Marker()
-                                    .setLngLat([37.01454335, -1.1070745666666666])
-                                    .addTo(GlobalMap);
+        //this.$store.commit('setGlobalMap', GlobalMap);
+        //this.$store.commit('setMarker', marker);
+        */
     },
 }
 </script>

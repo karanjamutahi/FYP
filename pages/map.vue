@@ -16,7 +16,20 @@
 </template>
 
 <script>
+import { GlobalMap, marker } from '../components/MapBox';
+
 let randomIndex = Math.floor((Math.random()*10) + 1);
+
+setInterval(() => {
+    //console.log("Attempting to Fetch ...");
+    fetch('https://wanderdrone.appspot.com').then((res) => {
+        if(res.ok) {
+            res.json().then(data => {
+                //console.log(data.geometry.coordinates);
+            });
+        }
+    });
+}, 2000);
 
 export default {
     data() {
@@ -86,7 +99,6 @@ export default {
     .row {
         display: flex;
         flex-direction: row;
-        overflow: scroll;
     }
 
     div.rowitem { 
