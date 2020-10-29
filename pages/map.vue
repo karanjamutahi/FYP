@@ -3,37 +3,20 @@
         <div class="row">
             <MapBox/>
             <div class="rowitem">
-                <VerticalProgress v-bind:progress="(this.randomIndex)/(this.busStops.length - 1)">
-                    <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < randomIndex ? 'visited' : '' ]" > {{ name }} </li>
+                <VerticalProgress v-bind:progress="(this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0)/(this.$store.state.progressMax ? this.$store.state.progressMax - 1 : 10)">
+                    <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < $store.state.progressLevel ? 'visited' : '' ]" > {{ name }} </li>
                 </VerticalProgress>
-                <div class="row">
-                    <div class="button" v-on:click="incrementRadom">Next</div>
-                    <div class="button" v-on:click="decrementRandom">Previous</div>
-                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { GlobalMap, marker } from '../components/MapBox';
-
 let randomIndex = Math.floor((Math.random()*10) + 1);
 
-setInterval(() => {
-    //console.log("Attempting to Fetch ...");
-    fetch('https://wanderdrone.appspot.com').then((res) => {
-        if(res.ok) {
-            res.json().then(data => {
-                //console.log(data.geometry.coordinates);
-            });
-        }
-    });
-}, 2000);
-
 export default {
-    data() {
-        return {
+    data: function() {
+        const dataObj = {
             name: 'Map',
             randomIndex: randomIndex,
             busStops: [
@@ -71,15 +54,22 @@ export default {
                     name: 'CBD'
                 }
                 ],
-        }
+        };
+
+        this.$store.commit('setProgressLevel', randomIndex);
+        console.log(`Setting Initial Progress Level @ ${this.$store.state.progressLevel}`);
+        this.$store.commit('setProgressMax', dataObj.busStops.length);
+        return dataObj;
     },
     watch: {
 
     },
     computed: {
         presentLocation: function() {
-            const presentLocation =  this.busStops[this.randomIndex].name
-            //console.log(`Random Index is ${this.randomIndex}`);
+            console.log(this.$store.state.progressLevel);
+            let level = this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0 ;
+            console.log(`Random Index is ${level}`);
+            const presentLocation =  this.busStops[level].name
             //console.log(presentLocation);
             return presentLocation;
         }

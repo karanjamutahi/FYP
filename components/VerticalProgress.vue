@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
     .children {
-        color: #ffa600;
+        color: #eee;
         font-weight: 600;
     }
 
@@ -73,6 +73,7 @@ export default {
 
     li.active {
         font-size: 3.5em;
+        color: #ffa600;
     }
 
     li.active::before {
@@ -89,7 +90,11 @@ export default {
     }
 
     li.active:last-child::before {
-        margin-bottom: 0px;
+        margin: 40px 0px 0px 0px;
+    }
+
+    li.visited {
+        color: #ffa600;
     }
 
     li.visited::before {

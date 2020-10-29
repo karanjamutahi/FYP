@@ -6,9 +6,9 @@ export default(context, inject) => {
                 if(context.$myMap) {
                     context.$myMap.flyTo({
                         center: data.geometry.coordinates,
-                        speed: 1.5
                     });
                     context.$marker.setLngLat(data.geometry.coordinates);
+                    context.store.commit('incrementProgress');
                 }
             })
         })

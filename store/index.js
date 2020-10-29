@@ -1,19 +1,24 @@
 export const state = function() {
     return {
-        GlobalMap: null,
         randomCoordinates: null,
-        marker: null
+        progressLevel: null,
+        progressMax: null
     }
 }
 
 export const mutations = {
-    setGlobalMap(state, mapObj) {
-        state.GlobalMap = mapObj;
-    },
     setRandomCoordinates(state, coords) {
         state.randomCoordinates = coords;
     },
-    setMarker(state, markerObj) {
-        state.marker = markerObj;
+    setProgressLevel(state, progressLevel) {
+        state.progressLevel = progressLevel;
+    },
+    setProgressMax(state, progressMax) {
+        console.log(`Progress Max set to ${progressMax}`);
+        state.progressMax = progressMax;
+    },
+    incrementProgress(state) {
+        state.progressLevel !== null && state.progressMax && state.progressLevel < state.progressMax - 1 ? state.progressLevel++ : state.progressLevel = 0;
+        //console.log(`Progress now @ ${state.progressLevel}`); 
     }
 }
