@@ -24,7 +24,8 @@ export default {
   plugins: [
     '~/plugins/mqtt.client.js',
     '~/plugins/fetchResults.client.js',
-    '~/plugins/mapbox.client.js'
+    '~/plugins/mapbox.client.js',
+    '~/plugins/marquee.client.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

@@ -1,4 +1,5 @@
 export default(context, inject) => {
+    /*
     setInterval(()=> {
         fetch('https://wanderdrone.appspot.com/').then((res) => {
             res.json().then(data => {
@@ -13,4 +14,5 @@ export default(context, inject) => {
             })
         })
     }, 2000);
+    */
 }

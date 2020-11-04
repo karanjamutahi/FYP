@@ -8,6 +8,9 @@
                 </VerticalProgress>
             </div>
         </div>
+        <div class="adMarquee">
+            <VTextMarquee content="SEND BETWAY TO 3553 AND STAND A CHANCE TO BECOME A MILLIONAIRE!"></VTextMarquee>
+        </div>
     </div>
 </template>
 
@@ -57,7 +60,7 @@ export default {
         };
 
         this.$store.commit('setProgressLevel', randomIndex);
-        console.log(`Setting Initial Progress Level @ ${this.$store.state.progressLevel}`);
+        //console.log(`Setting Initial Progress Level @ ${this.$store.state.progressLevel}`);
         this.$store.commit('setProgressMax', dataObj.busStops.length);
         return dataObj;
     },
@@ -66,9 +69,9 @@ export default {
     },
     computed: {
         presentLocation: function() {
-            console.log(this.$store.state.progressLevel);
+            //console.log(this.$store.state.progressLevel);
             let level = this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0 ;
-            console.log(`Random Index is ${level}`);
+            //console.log(`Random Index is ${level}`);
             const presentLocation =  this.busStops[level].name
             //console.log(presentLocation);
             return presentLocation;
@@ -94,7 +97,7 @@ export default {
     div.rowitem { 
         border-radius: 5px;
         padding: 10px;
-        margin: 50px;
+        margin: 10px 50px;
         width: 600px;
         height: 700px;
         background-color: #000333;
@@ -123,4 +126,14 @@ export default {
         cursor: pointer;
     }
 
+    div.adMarquee{
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        right: 0%;
+        background-color: #fbbc04;
+        color: #000333;
+        font-size: 2.5em;
+        font-weight: 500;
+    }
 </style>

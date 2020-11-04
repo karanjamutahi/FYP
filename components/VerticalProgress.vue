@@ -10,7 +10,7 @@ export default {
     name: 'VerticalProgress',
     props: ['progress'],
     data: function() {
-        console.log('Progress is at: ' + this.progress * 100 + '%');
+        //console.log('Progress is at: ' + this.progress * 100 + '%');
         return {
             activeColor: '#fbbc04',
             passiveColor: '#eee',
