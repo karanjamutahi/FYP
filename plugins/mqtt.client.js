@@ -1,28 +1,32 @@
-import Vue from 'vue'
 import mqtt from 'mqtt';
 
+const subscribe = function(client, topic) {
+    client.subscribe(topic, (err) => {
+        if(err) {
+            console.log("Failed to subscribe");
+        }
+    });
+};
+
 export default(context, inject) => {
-    if (!process.server) {
-        const options = {
-            clean: true,
-            connectTimeout:3000,
-            clientId: 'webapp_instance',
-            reconnectPeriod: 1000,
-        };
+    const url =  'wss://broker.emqx.io:8084/mqtt';
+    const mqttClient = mqtt.connect(url, {"clientId": "webapp_instance"});
+    mqttClient.on('message', (topic, payload, packet) => {
+        let coordinates = JSON.parse(payload.toString());
+        console.log("Got a message");
+        console.log(`${topic} --> ${coordinates}`);
+        context.store.commit('setStaleTime', (new Date().getTime())/1000);
+        context.store.commit('setRandomCoordinates', coordinates);
+        if(context.$myMap) {
+            context.$myMap.flyTo({
+                center: coordinates,
+            });
+            context.$marker.setLngLat(coordinates);
+            context.store.commit('incrementProgress');
+        }
+    });
 
-        const url =  location.protocol === 'https:' ? 'wss://broker.emqx.io:8084/mqtt' : 'ws://broker.emqx.io:8083/mqtt'
-        const mqttClient = mqtt.connect(url, options);
-        mqttClient.publish('/sawaTVCollector/webapp', 'connected');
-        mqttClient.subscribe('/sawaTVCollector/incoming', (err) => {
-            if(err) {
-                console.log("Failed to subscribe to /sawaTVCollector/incoming");
-
-            } else {
-                mqttClient.publish('/sawaTVCollector/webapp', 'Subsccribed to /sawaTVCollector/incoming');
-            }
-        });
-        console.log('Connected & published');
-        inject('mqttClient', mqttClient);
-        context.$mqttClient = mqttClient;
-    }
+    mqttClient.subscribe('sawaTV/coordinates', console.log);
+    inject('mqttClient', mqttClient);
+    context.$mqttClient = mqttClient;
 };

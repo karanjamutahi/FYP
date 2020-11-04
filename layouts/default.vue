@@ -1,9 +1,24 @@
 <template>
   <div>
-    <Nuxt />
+    <div class="status-bar" v-bind:class="this.stale ? 'disconnected' : 'connected' ">
+      <Nuxt />
+    </div>
   </div>
 </template>
-
+<script>
+export default {
+  computed: {
+    stale: function() {
+      return this.$store.state.staleTime - (new Date().getTime())/1000 > 5;
+    }
+  },
+  watch: {
+    stale: function(newValue, oldValue) {
+      console.log(`newStale`)
+    }
+  }
+}
+</script>>
 <style>
 html {
   font-family:
@@ -59,4 +74,16 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
+div.status-bar {
+  top: 0%;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+}
+
+div.status-bar.connected {
+  background-color: lawngreen;
+}
+
 </style>

@@ -32,7 +32,7 @@ export default {
 <style scoped>
     .mapContainer {
         border-radius: 5px;
-        margin: 50px 50px;
+        margin: 10px 50px;
         width: 100%;
         height: 700px;
     }
