@@ -9,7 +9,7 @@ export default {
     name: 'MapBox',
     data: function() {
         return {
-            accessToken: 'pk.eyJ1Ijoia2FyYW5qYW11dGFoaSIsImEiOiJja2c0dXFtMTkwb2J1MzNwNHdpbWk2dW5pIn0.UtXqlLEtuv87e_cxFaZepQ',
+            
         };
     },
     mounted: function() {

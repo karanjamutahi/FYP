@@ -12,7 +12,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/bus-15.svg' },
-      { rel: 'stylesheet', href:'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css'}
+      { rel: 'stylesheet', href:'https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css'}
     ]
   },
 
@@ -24,7 +24,7 @@ export default {
   plugins: [
     '~/plugins/mqtt.client.js',
     '~/plugins/fetchResults.client.js',
-    '~/plugins/mapbox.client.js',
+    '~/plugins/leafletMap.client.js',
     '~/plugins/marquee.client.js',
   ],
 
