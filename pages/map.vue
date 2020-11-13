@@ -22,7 +22,6 @@ let randomIndex = Math.floor((Math.random()*10) + 1);
 export default {
     data: function(context) {
         const dataObj = {
-            name: 'Map',
             randomIndex: randomIndex,
             busStops: [
                 {
@@ -71,11 +70,9 @@ export default {
                 }
                 ],
         };
-
         this.$store.commit('setProgressLevel', 0);
         this.$store.commit('setRouteCoordinates', dataObj.busStops);
         this.$store.commit('setProgressMax', dataObj.busStops.length);
-        
         return dataObj;
     },
     watch: {

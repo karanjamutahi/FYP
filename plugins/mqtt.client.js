@@ -15,7 +15,6 @@ export default(context, inject) => {
         
         console.log("Got a message");
         console.log(`${topic} --> ${coordinates}`);
-        console.log(coordinates);
         context.store.commit('setStaleTime', (new Date().getTime())/1000);
         context.store.commit('setRandomCoordinates', coordinates);
         if(mapInstance) {
@@ -29,11 +28,12 @@ export default(context, inject) => {
             } catch(e) {
                 console.error(e);
             }
-            console.log(context.store.state);
+            //console.log(context.store.state);
             if(!located && context.store.state.routeCoordinates.length > 0) {
+                let routeCoords = context.store.state.routeCoordinates;
                 context.store.state.routeCoordinates.forEach(element => {
                     let variance = distance(coordinates, element.center, {units: 'kilometers'});
-                    console.log(`Distance to ${element.name} -- ${variance}`);
+                    //console.log(`Distance to ${element.name} -- ${variance}`);
                     let increment = true;
                     if (variance < lastDistance) {
                         //console.log(`Found a lower variance ${variance} < ${lastDistance} @ ${element.name}`)
@@ -41,7 +41,8 @@ export default(context, inject) => {
                     }
                     else {
                         if(increment) {
-                            console.log(`We're now @ ${element.name}`);
+                            let place = routeCoords[currentIndex-1].name;
+                            console.log(`We're closest to ${place}`);
                         }
                         increment = false;
                     }

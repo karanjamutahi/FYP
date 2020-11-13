@@ -22,8 +22,6 @@
 <script>
 export default {
   data: function(ctx) {
-    ctx.$myName = 'Mutahi';
-    console.log(ctx);
     return {}
   }
 }

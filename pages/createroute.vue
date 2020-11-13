@@ -16,7 +16,7 @@
 <script>
 export default {
     data: function(context) {
-        console.log("Mounted")
+        console.log("Mounted");
         return {
             coords: "37.00, -1.00"
         }
