@@ -1,30 +1,63 @@
 import mqtt from 'mqtt';
+import {mapInstance, prettyMarker} from '../assets/mapbox';
+import distance from '@turf/distance';
 
-const subscribe = function(client, topic) {
-    client.subscribe(topic, (err) => {
-        if(err) {
-            console.log("Failed to subscribe");
-        }
-    });
-};
 
 export default(context, inject) => {
     const url =  'wss://broker.emqx.io:8084/mqtt';
     const mqttClient = mqtt.connect(url, {"clientId": "webapp_instance"});
     mqttClient.on('message', (topic, payload, packet) => {
-        let coordinates = JSON.parse(payload.toString()).reverse();
+        let lastDistance = 1000;
+        let located = false;
+        let currentIndex = 0;
+
+        let coordinates = JSON.parse(payload.toString());
+        
         console.log("Got a message");
         console.log(`${topic} --> ${coordinates}`);
+        console.log(coordinates);
         context.store.commit('setStaleTime', (new Date().getTime())/1000);
         context.store.commit('setRandomCoordinates', coordinates);
-        if(context.$myMap) {
-            context.$myMap.setView(coordinates);
-            context.$marker.setLatLng(coordinates);
-            context.store.commit('incrementProgress');
+        if(mapInstance) {
+            //context.$myMap.setView(coordinates);
+            try{
+                mapInstance.easeTo({
+                    center: coordinates
+                });
+                prettyMarker.setLngLat(coordinates);
+                context.store.commit('incrementProgress');
+            } catch(e) {
+                console.error(e);
+            }
+            console.log(context.store.state);
+            if(!located && context.store.state.routeCoordinates.length > 0) {
+                context.store.state.routeCoordinates.forEach(element => {
+                    let variance = distance(coordinates, element.center, {units: 'kilometers'});
+                    console.log(`Distance to ${element.name} -- ${variance}`);
+                    let increment = true;
+                    if (variance < lastDistance) {
+                        //console.log(`Found a lower variance ${variance} < ${lastDistance} @ ${element.name}`)
+                        lastDistance = variance;
+                    }
+                    else {
+                        if(increment) {
+                            console.log(`We're now @ ${element.name}`);
+                        }
+                        increment = false;
+                    }
+                    if(increment){
+                        currentIndex++;
+                    }
+                });
+            }
+
+            context.store.commit('setProgressLevel', currentIndex-1);
+            //console.log(prettyMarker);
+            //console.log(mapInstance);
         }
     });
 
-    mqttClient.subscribe('sawaTV/coordinates', console.log);
+    mqttClient.subscribe('sawaTV/real', console.log);
     inject('mqttClient', mqttClient);
     context.$mqttClient = mqttClient;
 };

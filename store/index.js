@@ -3,7 +3,8 @@ export const state = function() {
         randomCoordinates: null,
         progressLevel: null,
         progressMax: null,
-        staleTime: (new Date().getTime())/1000
+        staleTime: (new Date().getTime())/1000,
+        routeCoordinates: [],
     }
 }
 
@@ -12,10 +13,11 @@ export const mutations = {
         state.randomCoordinates = coords;
     },
     setProgressLevel(state, progressLevel) {
+        console.log(`Committing Progress Level ${progressLevel}`);
         state.progressLevel = progressLevel;
     },
     setProgressMax(state, progressMax) {
-        //console.log(`Progress Max set to ${progressMax}`);
+        console.log(`Progress Max set to ${progressMax}`);
         state.progressMax = progressMax;
     },
     incrementProgress(state) {
@@ -24,5 +26,15 @@ export const mutations = {
     },
     setStaleTime(state, time) {
         state.staleTime = time;
+    },
+    addCoordinate(state, coords) {
+        let Newcoords = [coords.lng, coords.lat];
+        //console.log(coords);
+        state.routeCoordinates.push(Newcoords);
+        console.log(`Appended coords: ${state.routeCoordinates} `);
+    },
+    setRouteCoordinates(state, coords){
+        state.routeCoordinates = coords;
+        console.log(`NEW ROUTE COORDS: ${state.routeCoordinates}`);
     }
 }

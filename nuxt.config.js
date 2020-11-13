@@ -1,7 +1,7 @@
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
-
+  ssr: false,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'sawaTV',
@@ -12,7 +12,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/bus-15.svg' },
-      { rel: 'stylesheet', href:'https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css'}
+      { rel: 'stylesheet', href:'https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' },
+      { rel: 'stylesheet', href: 'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' },
     ]
   },
 
@@ -23,9 +24,10 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/mqtt.client.js',
-    '~/plugins/fetchResults.client.js',
-    '~/plugins/leafletMap.client.js',
     '~/plugins/marquee.client.js',
+    //'~/plugins/mapbox.client.js',
+    //'~/plugins/tippy.client.js',
+    /* '~/plugins/leafletMap.client.js', */
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

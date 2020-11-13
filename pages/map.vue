@@ -15,53 +15,67 @@
 </template>
 
 <script>
+import {createMarker} from '../assets/mapbox';
+
 let randomIndex = Math.floor((Math.random()*10) + 1);
 
 export default {
-    data: function() {
+    data: function(context) {
         const dataObj = {
             name: 'Map',
             randomIndex: randomIndex,
             busStops: [
                 {
-                    name: 'Juja' 
+                    "name": "Juja",
+                    "center": [37.01548157438185, -1.1073284066916216]
                 },
                 {
-                    name: 'K Road'
+                    "name": "Kenyatta Road",
+                    "center": [37.00342510444577, -1.1251050951709516]
                 },
                 {
-                    name: 'Kimbo'
+                    "name": "Kimbo",
+                    "center": [36.97443255179667, -1.1331801907088987]
                 },
                 {
-                    name: 'Ruiru'
+                    "name": "Ruiru",
+                    "center": [36.96217259389775, -1.150276630396391]
                 },
                 {
-                    name: 'Roysambu'
+                    "name": "Roysambu",
+                    "center": [36.89283239316032, -1.2186547291484686]
                 },
                 {
-                    name: 'Garden City'
+                    "name": "Garden City",
+                    "center": [36.87809697227868, -1.2310606454807669]
                 },
                 {
-                    name: 'Allsops'
+                    "name": "Allsops",
+                    "center": [36.86921915938834, -1.2420022953580627]
                 },
                 {
-                    name: 'Drive Inn'
+                    "name": "Drive Inn",
+                    "center": [36.86355149914124, -1.2486360660944484]
                 },
                 {
-                    name: 'Muthaiga'
+                    "name": "Muthaiga",
+                    "center": [36.84359800414873, -1.2603368679351519]
                 },
                 {
-                    name: 'Ngara'
+                    "name": "Ngara",
+                    "center": [36.824396030746925, -1.2745684144535119]
                 },
                 {
-                    name: 'CBD'
+                    "name": "CBD",
+                    "center": [36.82524217474665, -1.284260717248003]
                 }
                 ],
         };
 
-        this.$store.commit('setProgressLevel', randomIndex);
-        //console.log(`Setting Initial Progress Level @ ${this.$store.state.progressLevel}`);
+        this.$store.commit('setProgressLevel', 0);
+        this.$store.commit('setRouteCoordinates', dataObj.busStops);
         this.$store.commit('setProgressMax', dataObj.busStops.length);
+        
         return dataObj;
     },
     watch: {
@@ -84,6 +98,11 @@ export default {
         decrementRandom: function() {
             this.randomIndex > 0 && this.randomIndex--
         }
+    },
+    mounted: function() {
+        this.busStops.forEach((stop) => {
+            createMarker(stop.center);
+        });
     }
  }
 </script>
@@ -135,5 +154,13 @@ export default {
         color: #000333;
         font-size: 2.5em;
         font-weight: 500;
+    }
+
+    @media only screen and (max-width: 1300px) {
+        div.adMarquee {
+            font-size: 1em;
+            font-weight: 700;
+            background-color: white;
+        }
     }
 </style>

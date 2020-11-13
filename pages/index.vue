@@ -6,22 +6,7 @@
         sawaTV
       </h1>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+        <NuxtLink to='/createroute' class='button--grey'>Route Creator</NuxtLink>
         <NuxtLink 
           to="/map"
           rel='noopener'
@@ -35,7 +20,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data: function(ctx) {
+    ctx.$myName = 'Mutahi';
+    console.log(ctx);
+    return {}
+  }
+}
 </script>
 
 <style>

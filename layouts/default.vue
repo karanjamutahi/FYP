@@ -83,7 +83,7 @@ div.status-bar {
 }
 
 div.status-bar.connected {
-  background-color: lawngreen;
+  background-color: rgb(0, 197, 142);
 }
 
 </style>
