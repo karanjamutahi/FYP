@@ -5,6 +5,10 @@ export const state = function() {
         progressMax: null,
         staleTime: (new Date().getTime())/1000,
         routeCoordinates: [],
+        marqueeMessage: {
+            message: "SMS BETWAY TO 4455 AND WIN BIG!",
+            speed: 50
+        },
     }
 }
 
@@ -36,5 +40,25 @@ export const mutations = {
     setRouteCoordinates(state, coords){
         state.routeCoordinates = coords;
         console.log(`NEW ROUTE COORDS: ${state.routeCoordinates}`);
+    },
+    setMarqueeMessage(state, obj){
+        console.log(obj.stage);
+        let messageString = `We're approaching ${obj.stage} where you can find: `;
+        let arrayLength = obj.message.length;
+
+        obj.message.forEach((element, index, array) => {
+            messageString += element;
+            if(index < arrayLength - 1) {
+                messageString += ", ";
+            }
+        });
+        messageString += ' and much more';
+        state.marqueeMessage.message = messageString;
+        state.marqueeMessage.speed = obj.speed;
+        console.log(`Marquee Message set as ${obj.message}`);
+    },
+    resetMarqueeMessage(state){
+        state.marqueeMessage.message = "SMS BETWAY TO 4455 AND WIN BIG!";
     }
+
 }

@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="adMarquee">
-            <VTextMarquee content="SEND BETWAY TO 3553 AND STAND A CHANCE TO BECOME A MILLIONAIRE!"></VTextMarquee>
+            <VTextMarquee :content="this.$store.state.marqueeMessage.message" :speed="this.$store.state.marqueeMessage.speed"></VTextMarquee>
         </div>
     </div>
 </template>
@@ -26,35 +26,43 @@ export default {
             busStops: [
                 {
                     "name": "Juja",
-                    "center": [37.01548157438185, -1.1073284066916216]
+                    "center": [37.01548157438185, -1.1073284066916216],
+                    "amenities": ['JKUAT', 'Juja Police Station', 'Senate Hotel', 'Juja City Mall']
                 },
                 {
                     "name": "Kenyatta Road",
-                    "center": [37.00342510444577, -1.1251050951709516]
+                    "center": [37.00342510444577, -1.1251050951709516],
+                    "amenities": ['Kalimoni High School', 'Juja City Mall']
                 },
                 {
                     "name": "Kimbo",
-                    "center": [36.97443255179667, -1.1331801907088987]
+                    "center": [36.97443255179667, -1.1331801907088987],
+                    "amenities": ['Nairobi Institute of Business Studies', 'GSU Training Camp']
                 },
                 {
                     "name": "Ruiru",
-                    "center": [36.96217259389775, -1.150276630396391]
+                    "center": [36.96217259389775, -1.150276630396391],
+                    "amenities": ['Rainbow Resort', 'KU - Ruiru Campus', 'Ruiru Railway Station']
                 },
                 {
                     "name": "Roysambu",
-                    "center": [36.89283239316032, -1.2186547291484686]
+                    "center": [36.89283239316032, -1.2186547291484686],
+                    "amenities": ['Garden City Mall', 'Kasarani Police Station']
                 },
                 {
                     "name": "Garden City",
-                    "center": [36.87809697227868, -1.2310606454807669]
+                    "center": [36.87809697227868, -1.2310606454807669],
+                    "amenities": ['Garden City Mall', 'Quiver Lounge']
                 },
                 {
                     "name": "Allsops",
-                    "center": [36.86921915938834, -1.2420022953580627]
+                    "center": [36.86921915938834, -1.2420022953580627],
+                    "amenities": ['GSU Headquarters', 'ABSA ATM @ Bayer Building']
                 },
                 {
                     "name": "Drive Inn",
-                    "center": [36.86355149914124, -1.2486360660944484]
+                    "center": [36.86355149914124, -1.2486360660944484],
+                    "amenities": ['Kenya School of Monetary Studies', 'KCA University']
                 },
                 {
                     "name": "Muthaiga",
