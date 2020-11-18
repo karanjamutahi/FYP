@@ -38,6 +38,6 @@ export default {
         border-radius: 5px;
         margin: 10px 50px;
         width: 100%;
-        height: 600px;
+        height: 650px;
     }
 </style>
