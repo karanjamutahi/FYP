@@ -145,11 +145,11 @@ export default {
         padding: 10px;
         margin: 10px 50px;
         width: 600px;
-        height: 500px;
+        height: 600px;
         background-color: #000333;
         box-shadow: #bebdbd 2px 2px 4px 4px;
-        font-size: 0.6em;
-        overflow: scroll;
+        font-size: 0.9em;
+        overflow: hidden;
     }
 
     div.center-text {
