@@ -2,6 +2,7 @@
     <div>
         <div class="row">
             <MapBox/>
+            <VueVideoPlayer v-if="this.$store.state.adTime" src='/Jumia.mp4'></VueVideoPlayer>
             <div class="rowitem">
                 <VerticalProgress v-bind:progress="(this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0)/(this.$store.state.progressMax ? this.$store.state.progressMax - 1 : 10)">
                     <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < $store.state.progressLevel ? 'visited' : '' ]" > {{ name }} </li>
@@ -47,12 +48,12 @@ export default {
                 {
                     "name": "Roysambu",
                     "center": [36.89283239316032, -1.2186547291484686],
-                    "amenities": ['Garden City Mall', 'Kasarani Police Station']
+                    "amenities": ['Thika Road Mall', 'Kasarani Police Station']
                 },
                 {
                     "name": "Garden City",
                     "center": [36.87809697227868, -1.2310606454807669],
-                    "amenities": ['Garden City Mall', 'Quiver Lounge']
+                    "amenities": ['Garden City Mall', 'EABL HQ']
                 },
                 {
                     "name": "Allsops",
@@ -66,15 +67,18 @@ export default {
                 },
                 {
                     "name": "Muthaiga",
-                    "center": [36.84359800414873, -1.2603368679351519]
+                    "center": [36.84359800414873, -1.2603368679351519],
+                    "amenities": ["Mathari Mental Hospital", "Muthaiga Shopping Center", "Muthaiga Golf Club"]
                 },
                 {
                     "name": "Ngara",
-                    "center": [36.824396030746925, -1.2745684144535119]
+                    "center": [36.824396030746925, -1.2745684144535119],
+                    "amenities": ["Fig Tree Market", "Arya Girls High School"]
                 },
                 {
                     "name": "CBD",
-                    "center": [36.82524217474665, -1.284260717248003]
+                    "center": [36.82524217474665, -1.284260717248003],
+                    "amenities": ["National Assembly of Kenya", "National Archives", "Uhuru Park"]
                 }
                 ],
         };

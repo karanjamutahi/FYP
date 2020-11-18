@@ -25,6 +25,7 @@ export default {
   plugins: [
     '~/plugins/mqtt.client.js',
     '~/plugins/marquee.client.js',
+    '~/plugins/vuevideo.client.js',
     //'~/plugins/mapbox.client.js',
     //'~/plugins/tippy.client.js',
     /* '~/plugins/leafletMap.client.js', */

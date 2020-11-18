@@ -1,5 +1,6 @@
 export const state = function() {
     return {
+        adTime: false,
         randomCoordinates: null,
         progressLevel: null,
         progressMax: null,
@@ -60,5 +61,4 @@ export const mutations = {
     resetMarqueeMessage(state){
         state.marqueeMessage.message = "SMS BETWAY TO 4455 AND WIN BIG!";
     }
-
 }
