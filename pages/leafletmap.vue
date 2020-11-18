@@ -3,8 +3,8 @@
         <div class="row">
             <Leaflet/>
             <VueVideoPlayer v-if="this.$store.state.adTime" src='/Jumia.mp4'></VueVideoPlayer>
-            <div class="rowitem">
-                <VerticalProgress v-bind:progress="(this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0)/(this.$store.state.progressMax ? this.$store.state.progressMax - 1 : 10)">
+            <div class="rowitem" ref="progressBar">
+                <VerticalProgress v-bind:progress="(this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0)/(this.$store.state.progressMax ? this.$store.state.progressMax - 1 : 10)" v-bind:scroll="this.prettyScroll">
                     <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < $store.state.progressLevel ? 'visited' : '' ]" > {{ name }} </li>
                 </VerticalProgress>
             </div>
@@ -100,6 +100,17 @@ export default {
             const presentLocation =  this.busStops[level].name
             //console.log(presentLocation);
             return presentLocation;
+        },
+        prettyScroll: function() {
+            console.log(this.$refs);
+            if(Object.keys(this.$refs).length !== 0){
+                console.log(this.$refs);
+                this.$refs.progressBar.scrollBy({
+                    top: 100
+                });
+            }
+            
+            return 1;
         }
     },
     methods: {
@@ -108,7 +119,7 @@ export default {
         },
         decrementRandom: function() {
             this.randomIndex > 0 && this.randomIndex--
-        }
+        },
     },
     mounted: function() {
         //console.log(`Error is here: ${busStops}`);
@@ -134,9 +145,11 @@ export default {
         padding: 10px;
         margin: 10px 50px;
         width: 600px;
-        height: 700px;
+        height: 500px;
         background-color: #000333;
-        box-shadow: #eeeeee 2px 2px 4px 4px;
+        box-shadow: #bebdbd 2px 2px 4px 4px;
+        font-size: 0.6em;
+        overflow: scroll;
     }
 
     div.center-text {
@@ -174,9 +187,8 @@ export default {
 
     @media only screen and (max-width: 1300px) {
         div.adMarquee {
-            font-size: 1em;
+            font-size: 2em;
             font-weight: 700;
-            background-color: white;
         }
     }
 </style>
