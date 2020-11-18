@@ -1,5 +1,6 @@
 import mqtt from 'mqtt';
 import {mapInstance, prettyMarker} from '../assets/mapbox';
+import {LMapInstance, LprettyMarker} from '../assets/leaflet';
 import distance from '@turf/distance';
 
 
@@ -20,14 +21,24 @@ export default(context, inject) => {
         //console.log(context);
         console.log(`${topic} --> ${coordinates}`);
         context.store.commit('setStaleTime', (new Date().getTime())/1000);
-        context.store.commit('setRandomCoordinates', coordinates);
-        if(mapInstance) {
+        context.store.commit('setRandomCoordinates', JSON.parse(JSON.stringify(coordinates)));
+        if(mapInstance || LMapInstance) {
             //context.$myMap.setView(coordinates);
             try{
-                mapInstance.easeTo({
-                    center: coordinates
-                });
-                prettyMarker.setLngLat(coordinates);
+                if(mapInstance) {
+                    //console.log('MapBox GL');
+                    mapInstance.easeTo({
+                        center: coordinates
+                    });
+                    prettyMarker.setLngLat(coordinates);
+                }
+                if(LMapInstance) {
+                    //console.log('MapBox Leaflet');
+                    let coords = JSON.parse(JSON.stringify(coordinates)).reverse();
+                    LMapInstance.setView(coords, 18);
+                    LprettyMarker.setLatLng(coords);
+                    console.log(`Unreversed ${coordinates}: Reversed: ${coords}`);
+                }
                 context.store.commit('incrementProgress');
             } catch(e) {
                 console.error(e);
@@ -42,7 +53,7 @@ export default(context, inject) => {
                     context.store.state.routeCoordinates.forEach((element, index, array) => {
                         let variance = distance(coordinates, element.center, {units: 'kilometers'});
                         //console.log(`Distance to ${element.name} -- ${variance}`);
-                        
+                        //console.log(`Zoom Level is ${LMapInstance.getZoom()}`);
                         let approaching = false;
                         if (variance < lastDistance) {
                             //console.log(`Found a lower variance ${variance} < ${lastDistance} @ ${element.name}`)

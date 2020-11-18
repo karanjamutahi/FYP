@@ -1,3 +1,5 @@
+//export const strict = 'false';
+
 export const state = function() {
     return {
         adTime: false,
@@ -22,7 +24,7 @@ export const mutations = {
         state.progressLevel = progressLevel;
     },
     setProgressMax(state, progressMax) {
-        //console.log(`Progress Max set to ${progressMax}`);
+        console.log(`Progress Max set to ${progressMax}`);
         state.progressMax = progressMax;
     },
     incrementProgress(state) {
@@ -39,7 +41,8 @@ export const mutations = {
         console.log(`Appended coords: ${state.routeCoordinates} `);
     },
     setRouteCoordinates(state, coords){
-        state.routeCoordinates = coords;
+        console.log('Setting Route coordinates');
+        state.routeCoordinates = [...coords];
         console.log(`NEW ROUTE COORDS: ${state.routeCoordinates}`);
     },
     setMarqueeMessage(state, obj){
