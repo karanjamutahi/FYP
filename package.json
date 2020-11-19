@@ -9,12 +9,17 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@turf/distance": "^6.0.1",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.20",
     "mapbox-gl": "^1.12.0",
+    "mapbox.js": "^3.3.1",
     "mqtt": "^4.2.1",
     "nuxt": "^2.14.6",
     "sass": "^1.28.0",
     "sass-loader": "^10.0.5",
+    "tippy.js": "^6.2.7",
+    "vue-core-video-player": "^0.2.0",
     "vue-text-marquee": "^1.1.0"
   },
   "devDependencies": {}

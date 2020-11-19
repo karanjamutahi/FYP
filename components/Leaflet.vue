@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import mapboxgl from 'mapbox-gl';
-import {mapInstance, startMap} from '../assets/mapbox.js';
+//import mapboxgl from 'mapbox-gl';
+//import {mapInstance, startMap} from '../assets/mapbox.js';
 import {LMapInstance, startLeafletMap} from '../assets/leaflet';
  
 export default {
@@ -16,7 +16,7 @@ export default {
     },
     mounted: function() {
         console.log(this.accessToken);
-        mapboxgl.accessToken = this.accessToken;
+        //mapboxgl.accessToken = this.accessToken;
         /*
         const GlobalMap = new mapboxgl.Map({
             container: 'route-creator-map-1',
@@ -25,8 +25,8 @@ export default {
             zoom: 14,
         });
         */
-       const GlobalMap = startMap('route-creator-map-1');
-       //const GlobalMap = startLeafletMap('route-creator-map-1');
+       //const GlobalMap = startMap('route-creator-map-1');
+       const GlobalMap = startLeafletMap('route-creator-map-1');
        
     },
 }
@@ -38,6 +38,6 @@ export default {
         border-radius: 5px;
         margin: 10px 50px;
         width: 100%;
-        height: 700px;
+        height: 650px;
     }
 </style>

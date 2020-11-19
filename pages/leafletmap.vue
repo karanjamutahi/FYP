@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="row">
-            <MapBox/>
+            <Leaflet/>
             <VueVideoPlayer v-if="this.$store.state.adTime" src='/Jumia.mp4'></VueVideoPlayer>
-            <div class="rowitem">
-                <VerticalProgress v-bind:progress="(this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0)/(this.$store.state.progressMax ? this.$store.state.progressMax - 1 : 10)">
+            <div class="rowitem" ref="progressBar">
+                <VerticalProgress v-bind:progress="(this.$store.state.progressLevel != null ? this.$store.state.progressLevel : 0)/(this.$store.state.progressMax ? this.$store.state.progressMax - 1 : 10)" v-bind:scroll="this.prettyScroll">
                     <li v-for='({ name }, index) in busStops' v-bind:key="index" v-bind:class="['children', name === presentLocation ? 'active' : '', index < $store.state.progressLevel ? 'visited' : '' ]" > {{ name }} </li>
                 </VerticalProgress>
             </div>
@@ -16,15 +16,11 @@
 </template>
 
 <script>
-import {createMarker} from '../assets/mapbox';
+//import {createMarker} from '../assets/mapbox';
+import {LcreateMarker} from '../assets/leaflet';
 
 let randomIndex = Math.floor((Math.random()*10) + 1);
-
-export default {
-    data: function(context) {
-        const dataObj = {
-            randomIndex: randomIndex,
-            busStops: [
+const busStops = [
                 {
                     "name": "Juja",
                     "center": [37.01548157438185, -1.1073284066916216],
@@ -80,7 +76,13 @@ export default {
                     "center": [36.82524217474665, -1.284260717248003],
                     "amenities": ["National Assembly of Kenya", "National Archives", "Uhuru Park"]
                 }
-                ],
+                ];
+
+export default {
+    data: function(context) {
+        const dataObj = {
+            randomIndex: randomIndex,
+            busStops: JSON.parse(JSON.stringify(busStops)),
         };
         this.$store.commit('setProgressLevel', 0);
         this.$store.commit('setRouteCoordinates', dataObj.busStops);
@@ -98,6 +100,17 @@ export default {
             const presentLocation =  this.busStops[level].name
             //console.log(presentLocation);
             return presentLocation;
+        },
+        prettyScroll: function() {
+            console.log(this.$refs);
+            if(Object.keys(this.$refs).length !== 0){
+                console.log(this.$refs);
+                this.$refs.progressBar.scrollBy({
+                    top: 100
+                });
+            }
+            
+            return 1;
         }
     },
     methods: {
@@ -106,12 +119,17 @@ export default {
         },
         decrementRandom: function() {
             this.randomIndex > 0 && this.randomIndex--
-        }
+        },
     },
     mounted: function() {
-        this.busStops.forEach((stop) => {
-            createMarker(stop.center);
+        //console.log(`Error is here: ${busStops}`);
+        let stops = busStops.slice(0);
+        stops.forEach((stop) => {
+            //console.log(stop.center);
+            let center = stop.center;
+            LcreateMarker(center.reverse());
         });
+   
     }
  }
 </script>
@@ -127,9 +145,11 @@ export default {
         padding: 10px;
         margin: 10px 50px;
         width: 600px;
-        height: 700px;
+        height: 650px;
         background-color: #000333;
-        box-shadow: #eeeeee 2px 2px 4px 4px;
+        box-shadow: #bebdbd 2px 2px 4px 4px;
+        font-size: 0.9em;
+        overflow: hidden;
     }
 
     div.center-text {
@@ -167,9 +187,8 @@ export default {
 
     @media only screen and (max-width: 1300px) {
         div.adMarquee {
-            font-size: 1em;
+            font-size: 2em;
             font-weight: 700;
-            background-color: white;
         }
     }
 </style>
